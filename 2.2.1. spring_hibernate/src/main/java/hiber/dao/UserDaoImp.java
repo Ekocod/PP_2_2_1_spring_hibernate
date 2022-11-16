@@ -6,31 +6,31 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
+    @Autowired
+    private void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
 
-    @Transactional
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
+    public List<User> getAllUsers() {
         Query query = sessionFactory.getCurrentSession().createQuery("from User");
         return query.getResultList();
     }
 
-    @Transactional
     @Override
     public List<User> getUserByCar(String model, int series) {
         Query<User> query = sessionFactory.getCurrentSession()
