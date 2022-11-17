@@ -63,7 +63,7 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                ", model='" + model + '\'' +
+                "model='" + model + '\'' +
                 ", series=" + series +
                 '}';
     }
